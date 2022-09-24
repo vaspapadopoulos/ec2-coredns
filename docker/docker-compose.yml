@@ -1,0 +1,13 @@
+---
+version: '3.8'
+
+services:
+  coredns:
+    build: coredns
+    restart: unless-stopped
+    command: "-dns.port=53"
+    ports:
+      - "53:53/udp"
+    environment:
+      - DOMAIN
+      - DOMAIN_ZONE_FILE

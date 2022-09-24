@@ -1,0 +1,11 @@
+{$DOMAIN}:53 {
+    log
+    errors
+    file {$DOMAIN_ZONE_FILE}
+}
+
+.:53 {
+    log
+    errors
+    forward . 8.8.8.8
+}
