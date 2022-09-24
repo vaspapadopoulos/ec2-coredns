@@ -1,0 +1,12 @@
+---
+collections:
+  - name: community.general
+    version: 5.6.0
+
+roles:
+  - name: geerlingguy.docker
+    version: 5.2.1
+  - name: oefenweb.ufw
+    version: v4.1.8
+  - name: willshersystems.sshd
+    version: v0.17.0

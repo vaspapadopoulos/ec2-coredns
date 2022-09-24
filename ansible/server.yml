@@ -1,0 +1,29 @@
+---
+- name: Setup Docker, SSH server and UFW
+  hosts: all
+  become: yes
+  roles:
+    - geerlingguy.docker
+    - willshersystems.sshd
+    - oefenweb.ufw
+
+- name: Disable systemd-resolved stub listener to free port 53
+  hosts: all
+  become: yes
+  tasks:
+    - name: Disable stub listener
+      ansible.builtin.lineinfile:
+        path: /etc/systemd/resolved.conf
+        line: "DNSStubListener=no"
+    - name: Add Google's Public DNS \#1 as primary DNS
+      ansible.builtin.lineinfile:
+        path: /etc/systemd/resolved.conf
+        line: "DNS=8.8.8.8"
+    - name: Add Google's Public DNS \#2 as secondary DNS
+      ansible.builtin.lineinfile:
+        path: /etc/systemd/resolved.conf
+        line: "FallbackDNS=8.8.4.4"
+    - name: Restart systemd service
+      ansible.builtin.systemd:
+        name: systemd-resolved
+        state: restarted

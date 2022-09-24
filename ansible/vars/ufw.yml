@@ -1,0 +1,12 @@
+---
+ufw_rules:
+  - comment: SSH
+    rule: allow
+    from_ip: any
+    to_port: 22
+    protocol: tcp
+  - comment: DNS
+    rule: allow
+    from_ip: any
+    to_port: 53
+    protocol: udp
